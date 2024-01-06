@@ -30,6 +30,7 @@ function User() {
                         </div>
                         <div className="field">
                             <img src={lock_icon} alt="icon" className="input-icon" height="16" width="16" />
+                            <img src={unlock_icon} alt="icon" className="input-icon" height="16" width="16" hidden/>
                             <input placeholder="Password" className="input-field" type="password" />
                             <img src={show_icon} alt="icon" className="input-icon" height="16" width="16" />
                             <img src={hide_icon} alt="icon" className="input-icon" height="16" width="16" hidden/>
@@ -37,6 +38,7 @@ function User() {
                         </div>
                         <div className="field">
                             <img src={lock_icon} alt="icon" className="input-icon" height="16" width="16" />
+                            <img src={unlock_icon} alt="icon" className="input-icon" height="16" width="16" hidden/>
                             <input placeholder="Confirm Password" className="input-field" type="password" />
                             <img src={show_icon} alt="icon" className="input-icon" height="16" width="16" />
                             <img src={hide_icon} alt="icon" className="input-icon" height="16" width="16" hidden/>
@@ -61,6 +63,7 @@ function User() {
                     </div>
                     <div className="field">
                         <img src={lock_icon} alt="icon" className="input-icon" height="16" width="16" />
+                        <img src={unlock_icon} alt="icon" className="input-icon" height="16" width="16" hidden/>
                         <input placeholder="Password" className="input-field" type="password" />
                         <img src={show_icon} alt="icon" className="input-icon" height="16" width="16" />
                         <img src={hide_icon} alt="icon" className="input-icon" height="16" width="16" hidden/>
