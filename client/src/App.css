@@ -11,8 +11,10 @@
 }
 
 .header {
+  display: flex;
   background-color: skyblue;
   width: 120rem;
+  justify-content: space-between;
 }
 
 .footer {

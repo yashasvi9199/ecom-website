@@ -9,3 +9,11 @@ li a{
     text-decoration: none;
 }
 
+.right, left{
+    list-style-type: none;
+    padding: 0;
+}
+
+.right{
+    padding-right: 15px;
+}
