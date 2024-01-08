@@ -1,4 +1,8 @@
 import React,{useEffect, useState} from 'react'
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
+
+//Icon imports
 import name_icon from '../assets/svg icons/name.svg'
 import user_icon from '../assets/svg icons/user.svg'
 import email_icon from '../assets/svg icons/at.svg'
@@ -18,6 +22,17 @@ function Register() {
     const [isDisabled,setIsDisabled] = useState(true)
     const [pwdVisibility, setPwdVisibility] = useState(false)
     const [confPwdVisibility, setConfPwdVisibility] = useState(false)
+    const navigate = useNavigate()
+
+    // this will hinder <PrivateComponent /> and activate a situation where 'user' key is avaialable on re-render {aka. user logged in}
+    // this is needed since PrivateComponent is checking if user is logged in and blocking all other routes
+    useEffect( ()=> {
+        const auth = localStorage.getItem('user')
+        if(auth)
+        {
+            navigate('/')
+        }
+    })
 
     //Icons visibility : main password
     const pwdVisible = () => {
@@ -37,23 +52,44 @@ function Register() {
     }, [name, userId, email, pwd, confPwd])     //the useEffect will re-run upon receiving any change in these parameters
 
     const reset =() => {
-        setName("")
-        setUserId("")
-        setEmail("")
-        setPwd("")
-        setConfPwd("")
+        setName(""); setUserId(""); setEmail(""); setPwd(""); setConfPwd("");
     }
 
     const signup =(e) => {
             let data = {
                 "name": name,
-                "id": userId,
+                "userID": userId,
                 "email" : email,
-                "pwd" : pwd
+                "password" : pwd
             }
-            console.log(data)
+            //saving data in browser local storage for login use. It only takes strings so we will use stringify to store in 'user' key
+            //Alternatively we can store this in cookies as well but for ease of use we will use local storage
+            localStorage.setItem("user",JSON.stringify(data))
+
+            
+            // console.log(data)
+
+            //AXIOS API BEGAN
+            const apiUrl = 'http://localhost:4000/user'
+            const postData = data
+            const headers = {
+                'Content-Type' : 'application/json',
+                // 'Authorization' : 'TOKEN ID'
+            }
+            axios
+                .post(apiUrl, postData, {headers})
+                .then( (response) => {
+                    //Handle Success part
+                    console.log(response)
+                    reset()
+                    navigate('/')
+                })
+                .catch( (error) => {
+                    console.error('Error => ',error)
+                })
+
+
             reset()
-            e.preventDefault();     //temporarily preventing page from reloading
     }
 
     // console.log('Current status :=',pwdVisibility)

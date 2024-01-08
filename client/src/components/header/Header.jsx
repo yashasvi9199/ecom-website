@@ -1,8 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Header.css'
 
 const Header = () => {
+    const auth = localStorage.getItem('user')
+    const navigate = useNavigate()
+    const logout = () => {
+        localStorage.removeItem("user")
+        navigate('/user')
+    }
     return(
         <>
             <ul className='left'>
@@ -12,8 +18,10 @@ const Header = () => {
                 <li><Link to='/profile'>Profile</Link></li>
             </ul>
             <ul className='right'>
-                <li><Link to='/logout'>Logout</Link></li>
-                <li><Link to='/user'>Signin / Signup</Link></li>
+                {auth !== null
+                ? <li><Link onClick={logout} to='/user'>Logout</Link></li>
+                : <li><Link to='/user'>Signin / Signup</Link></li>
+                }
             </ul>
         </>
     )
