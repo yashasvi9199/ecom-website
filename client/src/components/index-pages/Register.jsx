@@ -81,7 +81,7 @@ function Register() {
                 .then( (response) => {
                     //Handle Success part
                     console.log(response)
-                    reset()
+                    // reset()
                     navigate('/')
                 })
                 .catch( (error) => {
